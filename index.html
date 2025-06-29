@@ -26,27 +26,30 @@
     .menu-btn span:nth-child(1){ top: 0; }
     .menu-btn span:nth-child(2){ top: 8px; }
     .menu-btn span:nth-child(3){ top: 16px; }
-    nav { position: fixed; top: 0; right: -240px; width: 240px; height: 100%; background: var(--c-bg-end); transition: right var(--transition); padding-top: 4rem; z-index: 90; }
+    nav { position: fixed; top: 0; right: -100vw; width: 80vw; max-width: 300px; height: 100%; background: var(--c-bg-end); transition: right var(--transition); padding-top: 4rem; z-index: 90; }
     body.open nav { right: 0; }
     nav a { display: block; color: var(--c-text); text-decoration: none; padding: 1rem 1.5rem; font-weight: 500; transition: background var(--transition); }
     nav a:hover { background: rgba(100,255,218,0.1); }
-    main { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; padding: 2rem; }
-    section { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 48ch; text-align: center; opacity: 0; transition: opacity var(--transition); }
-    section.active { opacity: 1; }
-    h1 { font-size: clamp(2rem, 6vw, 3rem); font-weight: 600; color: var(--c-primary); margin-bottom: 1rem; }
-    .tagline { font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 300; color: var(--c-muted); margin-bottom: 2rem; line-height: 1.6; }
-    .cta { display: inline-block; border: 2px solid var(--c-primary); color: var(--c-primary); padding: 0.75rem 2rem; border-radius: 2rem; font-weight: 600; transition: transform 0.3s ease, background var(--transition), color var(--transition); }
+    main { flex: 1; position: relative; overflow: hidden; }
+    .section-container { display: flex; transition: transform var(--transition); }
+    section { flex: 0 0 100%; max-width: 100%; padding: 2rem; opacity: 1; transition: opacity var(--transition); }
+    section.hidden { opacity: 0; }
+    h1 { font-size: clamp(2rem, 6vw, 3rem); font-weight: 600; color: var(--c-primary); margin-bottom: 1rem; text-align: center; }
+    .tagline { font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 300; color: var(--c-muted); margin-bottom: 2rem; line-height: 1.6; text-align: center; }
+    .cta { display: inline-block; border: 2px solid var(--c-primary); color: var(--c-primary); padding: 0.75rem 2rem; border-radius: 2rem; font-weight: 600; transition: transform 0.3s ease, background var(--transition), color var(--transition); margin: auto; }
     .cta:hover { transform: translateY(-2px); background: var(--c-primary); color: var(--c-bg-start); }
     footer { text-align: center; font-size: 0.85rem; padding: 1rem 0; color: var(--c-muted); }
-    /* Responsive tweaks for mobile */
+    @media (min-width: 601px) {
+      main { display: flex; justify-content: center; align-items: center; padding: 2rem; }
+      .section-container { flex-direction: row; }
+    }
     @media (max-width: 600px) {
       header { padding: 0.5rem 1rem; }
       .logo { font-size: 1.25rem; }
-      nav { width: 100%; right: -100%; }
-      body.open nav { right: 0; }
-      main { padding: 1rem; }
-      section { position: relative; top: auto; left: auto; transform: none; opacity: 0; max-width: 100%; padding: 1rem; transition: opacity var(--transition); }
-      section.active { opacity: 1; }
+      nav { width: 100vw; right: -100vw; }
+      main { padding: 0; }
+      .section-container { flex-direction: column; }
+      section { padding: 1.5rem; }
       h1 { font-size: clamp(1.75rem, 8vw, 2.5rem); }
       .tagline { font-size: clamp(0.9rem, 4vw, 1rem); }
       .cta { padding: 0.5rem 1.5rem; }
@@ -65,16 +68,18 @@
     <a href="#about" data-target="about">About</a>
   </nav>
   <main>
-    <section id="home" class="active">
-      <h1>Coming Soon</h1>
-      <p class="tagline">Smart vehicle diagnostics & MOT insights delivered directly over WhatsApp. Launching soon!</p>
-      <a class="cta" href="mailto:info@garageintel.com">Notify Me on Launch</a>
-    </section>
-    <section id="about">
-      <h1>About GarageIntel</h1>
-      <p class="tagline">GarageIntel is a game-changing AI assistant that transforms your workshop workflow. Mechanic's simply text a number plate on WhatsApp, and instantly receive a full vehicle profile, MOT history, and prioritized fault analysis. Then, seamlessly schedule bookings, automate reminders, and issue invoices—all in one platform.</p>
-      <p class="tagline">By reducing diagnostic time by up to 50% and cutting follow-up calls by 30%, GarageIntel not only accelerates repair turnaround but also elevates customer trust and loyalty. Equip your garage with the future of vehicle servicing. Boost efficiency, cut costs, and stand out in a competitive market.</p>
-    </section>
+    <div class="section-container" id="sections">
+      <section id="home">
+        <h1>Coming Soon</h1>
+        <p class="tagline">Smart vehicle diagnostics & MOT insights delivered directly over WhatsApp. Launching soon!</p>
+        <a class="cta" href="mailto:info@garageintel.com">Notify Me on Launch</a>
+      </section>
+      <section id="about" class="hidden">
+        <h1>About GarageIntel</h1>
+        <p class="tagline">GarageIntel is a game-changing AI assistant that transforms your workshop workflow. Mechanic's simply text a number plate on WhatsApp, and instantly receive a full vehicle profile, MOT history, and prioritized fault analysis. Then, seamlessly schedule bookings, automate reminders, and issue invoices—all in one platform.</p>
+        <p class="tagline">By reducing diagnostic time by up to 50% and cutting follow-up calls by 30%, GarageIntel not only accelerates repair turnaround but also elevates customer trust and loyalty. Equip your garage with the future of vehicle servicing. Boost efficiency, cut costs, and stand out in a competitive market.</p>
+      </section>
+    </div>
   </main>
   <footer>
     <p>© <span id="year"></span> GarageIntel Ltd — All rights reserved.</p>
@@ -84,15 +89,21 @@
     const menuBtn = document.getElementById('menuBtn');
     const body = document.body;
     const navLinks = document.querySelectorAll('nav a');
-    const sections = document.querySelectorAll('section');
+    const sectionContainer = document.getElementById('sections');
+    const sections = Array.from(sectionContainer.children);
 
     menuBtn.addEventListener('click', () => body.classList.toggle('open'));
     navLinks.forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
         const target = link.getAttribute('data-target');
-        sections.forEach(sec => {
-          sec.classList.toggle('active', sec.id === target);
+        sections.forEach((sec, idx) => {
+          if (sec.id === target) {
+            sec.classList.remove('hidden');
+            sectionContainer.style.transform = `translateX(-${idx * 100}%)`;
+          } else {
+            sec.classList.add('hidden');
+          }
         });
         body.classList.remove('open');
       });
