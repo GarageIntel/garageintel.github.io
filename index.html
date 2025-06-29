@@ -80,11 +80,22 @@
     .section.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
     /* Hero */
-    .btn {$1; display: block; margin: 1.2rem auto 0;}
-    .hero h1 {
-      font-size: clamp(2rem,5.5vw,2.8rem);
-      font-weight: 600; color: var(--c-primary);
-      margin-bottom: 1rem; text-align: center;
+    .btn {
+      display: block;
+      margin: 1.2rem auto 0;
+      border: 2px solid var(--c-primary);
+      border-radius: 2rem;
+      padding: .6rem 2rem;
+      font-weight: 600;
+      color: var(--c-primary);
+      text-decoration: none;
+      transition: background .35s var(--easing), transform .2s var(--easing);
+    }
+    .hero {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
     }
     .hero .copy p {
       font-size: clamp(.98rem,3.3vw,1.08rem);
@@ -158,7 +169,11 @@
       header { padding: .75rem 1rem; }
       .pricing-grid { gap: .75rem; }
     }
-  </style>
+    .hero h1 {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+</style>
 </head>
 <body>
   <header>
