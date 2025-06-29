@@ -15,10 +15,10 @@
       --c-primary:  #64ffda;
       --c-text:     #ccd6f6;
       --c-muted:    #8892b0;
-      --transition: 0.5s ease;
+      --transition: 0.6s ease;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, var(--c-bg-start), var(--c-bg-end)); color: var(--c-text); min-height: 100vh; display: flex; flex-direction: column; }
+    body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, var(--c-bg-start), var(--c-bg-end)); color: var(--c-text); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
     header { position: relative; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
     .logo { font-weight: 600; color: var(--c-primary); font-size: 1.5rem; }
     .menu-btn { width: 24px; height: 18px; position: relative; cursor: pointer; z-index: 110; }
@@ -30,12 +30,12 @@
     body.open nav { right: 0; }
     nav a { display: block; color: var(--c-text); text-decoration: none; padding: 1rem 1.5rem; font-weight: 500; transition: background var(--transition); }
     nav a:hover { background: rgba(100,255,218,0.1); }
-    main { flex: 1; display: flex; justify-content: center; align-items: center; padding: 2rem; }
-    section { display: none; max-width: 48ch; text-align: center; }
-    section.active { display: block; }
+    main { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; padding: 2rem; }
+    section { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 48ch; text-align: center; opacity: 0; transition: opacity var(--transition); }
+    section.active { opacity: 1; }
     h1 { font-size: clamp(2rem, 6vw, 3rem); font-weight: 600; color: var(--c-primary); margin-bottom: 1rem; }
     .tagline { font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 300; color: var(--c-muted); margin-bottom: 2rem; line-height: 1.6; }
-    .cta { display: inline-block; border: 2px solid var(--c-primary); color: var(--c-primary); padding: 0.75rem 2rem; border-radius: 2rem; font-weight: 600; transition: transform 0.3s ease; }
+    .cta { display: inline-block; border: 2px solid var(--c-primary); color: var(--c-primary); padding: 0.75rem 2rem; border-radius: 2rem; font-weight: 600; transition: transform 0.3s ease, background var(--transition), color var(--transition); }
     .cta:hover { transform: translateY(-2px); background: var(--c-primary); color: var(--c-bg-start); }
     footer { text-align: center; font-size: 0.85rem; padding: 1rem 0; color: var(--c-muted); }
   </style>
@@ -59,7 +59,7 @@
     </section>
     <section id="about">
       <h1>About GarageIntel</h1>
-      <p class="tagline">GarageIntel is a game-changing AI assistant that transforms your workshop workflow. Mechanic’s simply text a number plate on WhatsApp, and instantly receive a full vehicle profile, MOT history, and prioritized fault analysis. Then, seamlessly schedule bookings, automate reminders, and issue invoices—all in one platform.</p>
+      <p class="tagline">GarageIntel is a game-changing AI assistant that transforms your workshop workflow. Mechanic's simply text a number plate on WhatsApp, and instantly receive a full vehicle profile, MOT history, and prioritized fault analysis. Then, seamlessly schedule bookings, automate reminders, and issue invoices—all in one platform.</p>
       <p class="tagline">By reducing diagnostic time by up to 50% and cutting follow-up calls by 30%, GarageIntel not only accelerates repair turnaround but also elevates customer trust and loyalty. Equip your garage with the future of vehicle servicing. Boost efficiency, cut costs, and stand out in a competitive market.</p>
     </section>
   </main>
@@ -71,14 +71,21 @@
     const menuBtn = document.getElementById('menuBtn');
     const body = document.body;
     const navLinks = document.querySelectorAll('nav a');
+    const sections = document.querySelectorAll('section');
 
     menuBtn.addEventListener('click', () => body.classList.toggle('open'));
     navLinks.forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
         const target = link.getAttribute('data-target');
-        document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
-        document.getElementById(target).classList.add('active');
+        sections.forEach(sec => {
+          if (sec.id === target) {
+            sec.classList.add('active');
+          } else {
+            sec.classList.remove('active');
+          }
+        });
+        body.classList.remove('open');
       });
     });
   </script>
