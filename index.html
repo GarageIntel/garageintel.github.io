@@ -162,7 +162,11 @@
     footer .legal{ max-width:800px; margin:.5rem auto 0; font-size:.75rem; line-height:1.4; }
     /* Mobile overrides */
     @media (max-width:600px) {
-      header{ padding:.75rem 1rem; }
+      header{ padding:.75rem 1rem; 
+      /* Feature details spacing on mobile */
+      .feature-details ul { margin: 1rem 0; line-height: 1.6; }
+      .feature-details ul li { margin: 0.75rem 0; }
+    }
       .pricing-grid{ justify-content:flex-start; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; padding:0 1rem; margin:2rem 0; }
       .pricing-grid::-webkit-scrollbar{ display:none; }
       .pricing-grid .card{ flex:0 0 auto; width:260px; }
