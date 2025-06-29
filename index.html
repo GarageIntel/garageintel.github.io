@@ -105,14 +105,14 @@
       display: flex; justify-content: center;
       gap: 1.5rem; flex-wrap: wrap;
       margin: 2rem 0;
-    }
+     align-items: stretch; }
     .card {
       background: var(--card-bg); backdrop-filter: blur(5px);
       padding: 2rem 1.5rem; border-radius: 1rem;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
       max-width: 280px; text-align: center;
       transition: transform .3s var(--easing);
-    }
+     display: flex; flex-direction: column; justify-content: space-between; }
     .card:hover { transform: translateY(-6px) scale(1.02); }
     .pricing-grid h2 {
       font-size: 1.3rem; color: var(--c-primary);
@@ -162,7 +162,7 @@
 </head>
 <body>
   <header>
-    <a href="#about" class="logo" id="homeLink">GarageIntel™</a>
+    <a href="#about" class="logo" id="homeLink" data-page="about">GarageIntel™</a>
     <div class="burger" id="burger"><span></span><span></span><span></span></div>
   </header>
   <nav>
