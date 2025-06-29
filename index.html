@@ -70,7 +70,20 @@
     /* Footer */
     footer{ padding:1rem 1.5rem; text-align:center; font-size:.85rem; color:var(--c-muted); }
     footer .legal{ max-width:800px; margin:.5rem auto 0; font-size:.75rem; line-height:1.4; }
-    @media(max-width:600px){ header{padding:.75rem 1rem;} .pricing-grid{ flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;} .pricing-grid .card{ flex:0 0 auto; min-width:260px;} }
+    @media(max-width:600px){
+      header{padding:.75rem 1rem;}
+      /* Mobile pricing: horizontal scroll with padding for visibility */
+      .pricing-grid{
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+        padding:0 1rem;
+      }
+      .pricing-grid .card{
+        flex:0 0 auto;
+        min-width:260px;
+      }
+    } .pricing-grid{ flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;} .pricing-grid .card{ flex:0 0 auto; min-width:260px;} }
   </style>
 </head>
 <body>
