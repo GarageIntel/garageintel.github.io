@@ -15,30 +15,29 @@
       --c-primary:  #64ffda;
       --c-text:     #ccd6f6;
       --c-muted:    #8892b0;
-      --transition-fast: 0.3s;
-      --transition-slow: 0.6s;
+      --transition: 0.5s ease;
     }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body { font-family:'Poppins',sans-serif; background:linear-gradient(135deg, var(--c-bg-start), var(--c-bg-end)); color:var(--c-text); min-height:100vh; display:flex; flex-direction:column; }
-    header { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; }
-    .logo { font-weight:600; color:var(--c-primary); font-size:1.5rem; }
-    .menu-btn { width:24px; height:18px; position:relative; cursor:pointer; }
-    .menu-btn span { position:absolute; height:2px; width:100%; background:var(--c-primary); left:0; transition:var(--transition-slow); }
-    .menu-btn span:nth-child(1){ top:0; }
-    .menu-btn span:nth-child(2){ top:8px; }
-    .menu-btn span:nth-child(3){ top:16px; }
-    nav { position:fixed; top:0; right:-100%; width:220px; height:100%; background:var(--c-bg-end); transition:right var(--transition-slow) ease; padding-top:4rem; }
-    nav a { display:block; color:var(--c-text); text-decoration:none; padding:1rem 1.5rem; font-weight:500; transition:background var(--transition-slow); }
-    nav a:hover { background:rgba(100,255,218,0.1); }
-    .open nav { right:0; }
-    main { flex:1; position:relative; overflow:hidden; }
-    section { position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); max-width:48ch; padding:0 1rem; opacity:0; visibility:hidden; transition:opacity var(--transition-slow) ease, visibility 0s linear var(--transition-slow); }
-    section.active { visibility:visible; opacity:1; transition-delay: var(--transition-fast); }
-    h1 { font-size:clamp(2rem,6vw,3rem); font-weight:600; color:var(--c-primary); margin-bottom:1rem; }
-    .tagline { font-size:clamp(1rem,3vw,1.2rem); font-weight:300; color:var(--c-muted); margin-bottom:2rem; line-height:1.6; }
-    .cta { display:inline-block; border:2px solid var(--c-primary); color:var(--c-primary); padding:0.75rem 2rem; border-radius:2rem; font-weight:600; transition:background var(--transition-slow), color var(--transition-slow), transform var(--transition-fast); }
-    .cta:hover { background:var(--c-primary); color:var(--c-bg-start); transform:translateY(-2px); }
-    footer { text-align:center; font-size:0.85rem; padding:1rem 0; color:var(--c-muted); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, var(--c-bg-start), var(--c-bg-end)); color: var(--c-text); min-height: 100vh; display: flex; flex-direction: column; }
+    header { position: relative; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+    .logo { font-weight: 600; color: var(--c-primary); font-size: 1.5rem; }
+    .menu-btn { width: 24px; height: 18px; position: relative; cursor: pointer; z-index: 110; }
+    .menu-btn span { position: absolute; height: 2px; width: 100%; background: var(--c-primary); left: 0; transition: var(--transition); }
+    .menu-btn span:nth-child(1){ top: 0; }
+    .menu-btn span:nth-child(2){ top: 8px; }
+    .menu-btn span:nth-child(3){ top: 16px; }
+    nav { position: fixed; top: 0; right: -240px; width: 240px; height: 100%; background: var(--c-bg-end); transition: right var(--transition); padding-top: 4rem; z-index: 90; }
+    body.open nav { right: 0; }
+    nav a { display: block; color: var(--c-text); text-decoration: none; padding: 1rem 1.5rem; font-weight: 500; transition: background var(--transition); }
+    nav a:hover { background: rgba(100,255,218,0.1); }
+    main { flex: 1; display: flex; justify-content: center; align-items: center; padding: 2rem; }
+    section { display: none; max-width: 48ch; text-align: center; }
+    section.active { display: block; }
+    h1 { font-size: clamp(2rem, 6vw, 3rem); font-weight: 600; color: var(--c-primary); margin-bottom: 1rem; }
+    .tagline { font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 300; color: var(--c-muted); margin-bottom: 2rem; line-height: 1.6; }
+    .cta { display: inline-block; border: 2px solid var(--c-primary); color: var(--c-primary); padding: 0.75rem 2rem; border-radius: 2rem; font-weight: 600; transition: transform 0.3s ease; }
+    .cta:hover { transform: translateY(-2px); background: var(--c-primary); color: var(--c-bg-start); }
+    footer { text-align: center; font-size: 0.85rem; padding: 1rem 0; color: var(--c-muted); }
   </style>
 </head>
 <body>
@@ -53,16 +52,15 @@
     <a href="#about" data-target="about">About</a>
   </nav>
   <main>
-    <section id="home" class="home active">
+    <section id="home" class="active">
       <h1>Coming Soon</h1>
       <p class="tagline">Smart vehicle diagnostics & MOT insights delivered directly over WhatsApp. Launching soon!</p>
       <a class="cta" href="mailto:info@garageintel.com">Notify Me on Launch</a>
     </section>
-    <section id="about" class="about">
+    <section id="about">
       <h1>About GarageIntel</h1>
-      <p class="tagline">GarageIntel revolutionizes workshop operations by offering an AI-driven assistant on WhatsApp that instantly provides complete vehicle profiles, MOT histories, and expert fault analysis—right at your fingertips.</p>
-      <p class="tagline">By speeding up diagnostics and communications, you can turn around jobs up to 50% faster, reduce callbacks by 30%, and create a seamless customer experience that drives loyalty and referrals.</p>
-      <p class="tagline">Scalable and modular, GarageIntel integrates with booking, reminders, and invoicing systems—transforming every aspect of customer service and boosting your shop’s reputation as tech-forward and customer-centric.</p>
+      <p class="tagline">GarageIntel is a game-changing AI assistant that transforms your workshop workflow. Mechanic’s simply text a number plate on WhatsApp, and instantly receive a full vehicle profile, MOT history, and prioritized fault analysis. Then, seamlessly schedule bookings, automate reminders, and issue invoices—all in one platform.</p>
+      <p class="tagline">By reducing diagnostic time by up to 50% and cutting follow-up calls by 30%, GarageIntel not only accelerates repair turnaround but also elevates customer trust and loyalty. Equip your garage with the future of vehicle servicing. Boost efficiency, cut costs, and stand out in a competitive market.</p>
     </section>
   </main>
   <footer>
@@ -72,25 +70,15 @@
     document.getElementById('year').textContent = new Date().getFullYear();
     const menuBtn = document.getElementById('menuBtn');
     const body = document.body;
-    const sections = document.querySelectorAll('main section');
     const navLinks = document.querySelectorAll('nav a');
 
-    // Toggle navigation
-    menuBtn.addEventListener('click', () => {
-      body.classList.toggle('open');
-    });
-
-    // Section navigation
+    menuBtn.addEventListener('click', () => body.classList.toggle('open'));
     navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
+      link.addEventListener('click', e => {
         e.preventDefault();
         const target = link.getAttribute('data-target');
-        sections.forEach(sec => sec.classList.remove('active'));
-        const activeSection = document.getElementById(target);
-        if (activeSection) {
-          activeSection.classList.add('active');
-        }
-        body.classList.remove('open');
+        document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
+        document.getElementById(target).classList.add('active');
       });
     });
   </script>
