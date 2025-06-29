@@ -2,109 +2,153 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GarageIntel</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --c-bg-start:#0a192f;
-      --c-bg-end:#172a45;
-      --c-primary:#64ffda;
-      --c-text:#ccd6f6;
-      --c-muted:#8ea2c8;
-      --easing:cubic-bezier(.4,.2,.2,1);
+      --c-bg-start: #0a192f;
+      --c-bg-end: #172a45;
+      --c-primary: #64ffda;
+      --c-text: #ccd6f6;
+      --c-muted: #8ea2c8;
+      --card-bg: rgba(255,255,255,0.05);
+      --easing: cubic-bezier(.4,.2,.2,1);
     }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{
+    *,*::before,*::after { box-sizing: border-box; margin:0; padding:0 }
+    body {
       font-family:'Poppins',sans-serif;
-      background:linear-gradient(135deg,var(--c-bg-start),var(--c-bg-end));
-      color:var(--c-text);
+      background: linear-gradient(135deg, var(--c-bg-start), var(--c-bg-end));
+      color: var(--c-text);
       min-height:100vh;
       display:flex;
       flex-direction:column;
       overflow-x:hidden;
+      position: relative;
     }
-    /* header */
-    header{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.5rem;position:relative;z-index:10}
-    .logo{font-size:1.4rem;font-weight:600;color:var(--c-primary)}
-    /* burger */
-    .burger{width:24px;height:16px;position:relative;cursor:pointer}
-    .burger span{position:absolute;width:100%;height:2px;background:var(--c-primary);left:0;transition:transform .4s var(--easing)}
-    .burger span:nth-child(1){top:0}
-    .burger span:nth-child(2){top:50%;transform:translateY(-50%)}
-    .burger span:nth-child(3){bottom:0}
-    body.menu-open .burger span:nth-child(1){transform:translateY(6px) rotate(45deg)}
-    body.menu-open .burger span:nth-child(2){opacity:0}
-    body.menu-open .burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-    /* nav */
-    nav{position:fixed;inset:0 0 0 auto;width:80vw;max-width:280px;background:var(--c-bg-end);translate:100% 0;transition:translate .45s var(--easing);padding-top:4rem;display:flex;flex-direction:column;gap:.5rem}
-    body.menu-open nav{translate:0 0}
-    nav a{padding:.9rem 1.5rem;font-weight:500;text-decoration:none;color:var(--c-text);transition:background .35s var(--easing)}
-    nav a:hover{background:rgba(100,255,218,.12)}
-    /* main */
-    main{flex:1;display:flex;align-items:center;justify-content:center;padding:2rem 1rem}
-    .card{max-width:640px;width:100%;animation:fadeIn .55s var(--easing);text-align:center;}
-    @keyframes fadeIn{from{opacity:0;translate:0 20px}to{opacity:1;translate:0 0}}
-    h1{font-size:clamp(2rem,5.5vw,2.8rem);font-weight:600;color:var(--c-primary);margin-bottom:1rem;text-align:center}
-    .lead{font-size:clamp(1.05rem,3.4vw,1.25rem);font-weight:300;color:var(--c-muted);line-height:1.55;text-align:center;margin-bottom:2rem}
-    .btn{display:inline-block;border:2px solid var(--c-primary);border-radius:2rem;padding:.6rem 2rem;font-weight:600;color:var(--c-primary);text-decoration:none;transition:background .35s var(--easing),color .35s var(--easing);margin:0 auto}
-    .btn:hover{background:var(--c-primary);color:var(--c-bg-start)}
-    /* about copy */
-    .copy p{font-size:clamp(.98rem,3.3vw,1.08rem);color:var(--c-text);line-height:1.7;margin-bottom:1.4rem;text-align:left}
-    .hide{display:none}
-    /* responsive */
-    @media(max-width:520px){header{padding:.75rem 1rem}.logo{font-size:1.2rem}}
+    /* subtle texture */
+    body::before {
+      content: '';
+      position:absolute; top:0; left:0; width:100%; height:100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2"><rect width="1" height="1" fill="rgba(255,255,255,0.03)"/></svg>') repeat;
+      pointer-events:none;
+    }
+    header { display:flex; justify-content:space-between; align-items:center; padding:1rem 1.5rem; position:relative; z-index:10 }
+    .logo { font-size:1.4rem; font-weight:600; color:var(--c-primary) }
+    .burger { width:24px; height:16px; position:relative; cursor:pointer }
+    .burger span { position:absolute; width:100%; height:2px; background:var(--c-primary); left:0; transition:transform .4s var(--easing) }
+    .burger span:nth-child(1){ top:0 }
+    .burger span:nth-child(2){ top:50%; transform: translateY(-50%) }
+    .burger span:nth-child(3){ bottom:0 }
+    body.menu-open .burger span:nth-child(1){ transform:translateY(6px) rotate(45deg) }
+    body.menu-open .burger span:nth-child(2){ opacity:0 }
+    body.menu-open .burger span:nth-child(3){ transform:translateY(-6px) rotate(-45deg) }
+    nav { position:fixed; top:0; right:-100vw; width:80vw; max-width:280px; height:100%; background:var(--c-bg-end); padding-top:4rem; transition:right .45s var(--easing); display:flex; flex-direction:column; gap:.5rem; z-index:9 }
+    body.menu-open nav { right:0 }
+    nav a { padding:.9rem 1.5rem; font-weight:500; text-decoration:none; color:var(--c-text); transition:background .35s var(--easing) }
+    nav a:hover { background: rgba(100,255,218,0.12) }
+    main { flex:1; padding:2rem 1rem }
+    .section { display:none; animation:fadeIn .5s var(--easing) forwards }
+    .section.active { display:block }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    h1 { font-size:clamp(2rem,5.5vw,2.8rem); font-weight:600; color:var(--c-primary); margin-bottom:1rem; text-align:center }
+    .lead { font-size:clamp(1.05rem,3.4vw,1.25rem); font-weight:300; color:var(--c-muted); line-height:1.55; text-align:center; margin-bottom:2rem }
+    .btn, .card-btn { display:inline-block; border:2px solid var(--c-primary); border-radius:2rem; padding:.6rem 2rem; font-weight:600; color:var(--c-primary); text-decoration:none; transition:background .35s var(--easing), color .35s var(--easing), transform .2s }
+    .btn:hover, .card-btn:hover { background:var(--c-primary); color:var(--c-bg-end); transform:translateY(-2px) }
+    /* About */
+    .copy p { font-size:clamp(.98rem,3.3vw,1.08rem); color:var(--c-text); line-height:1.7; margin-bottom:1.4rem; text-align:left; max-width:640px; margin-inline:auto }
+    /* Pricing */
+    .pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; max-width:1000px; margin:0 auto }
+    .card { background:var(--card-bg); padding:1.5rem; border-radius:1rem; backdrop-filter:blur(5px); box-shadow:0 4px 12px rgba(0,0,0,0.25); position:relative; overflow:hidden }
+    .card:hover { transform:scale(1.02); transition:transform .3s var(--easing) }
+    .card h2 { font-size:1.3rem; margin-bottom:.5rem; color:var(--c-primary); text-align:center }
+    .card ul { list-style:none; margin:0; padding:0 1rem; margin-bottom:1rem }
+    .card ul li { margin:0.5rem 0; font-size:1rem; text-align:left }
+    .card .price { font-size:2rem; font-weight:600; text-align:center; margin:1rem 0 }
+    .card-btn { width:100%; text-align:center }
+    /* Footer */
+    footer { text-align:center; font-size:.85rem; padding:1rem 0; color:var(--c-muted) }
+    footer .legal { max-width:800px; margin:0 auto; font-size:.75rem; color:var(--c-muted); line-height:1.4; margin-top:.5rem }
+    /* Responsive tweaks */
+    @media(max-width:520px){ header{padding:.75rem 1rem} .logo{font-size:1.2rem} }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">GarageIntel</div>
+    <div class="logo">GarageIntel™</div>
     <div class="burger" id="burger"><span></span><span></span><span></span></div>
   </header>
-
   <nav>
-    <a href="#" data-page="home">Home</a>
-    <a href="#" data-page="about">About</a>
+    <a href="#" data-page="about">About Us</a>
+    <a href="#" data-page="pricing">Pricing</a>
   </nav>
-
   <main>
-    <!-- HOME -->
-    <div id="home" class="card">
-      <h1>Coming Soon</h1>
-      <p class="lead">Smart vehicle diagnostics & MOT insights delivered instantly via WhatsApp.</p>
-      <a class="btn" href="mailto:info@garageintel.com">Keep me posted</a>
-    </div>
-
-    <!-- ABOUT -->
-    <div id="about" class="card hide">
+    <!-- About Section -->
+    <div id="about" class="section active">
       <h1>About GarageIntel</h1>
       <div class="copy">
-        <p><strong>GarageIntel</strong> equips modern workshops with an AI‑powered assistant that delivers vehicle profiles, MOT history, and fault prioritisation in seconds—simply by texting the number‑plate.</p>
-        <p>Our clients report <strong>50&nbsp;% faster</strong> diagnostics, <strong>30&nbsp;% fewer</strong> follow‑up calls, and higher customer satisfaction ratings after just one month.</p>
-        <p>Integrated bookings, automated reminders, and on‑the‑spot invoicing mean you spend less time on admin and more time turning spanners.</p>
+        <p><strong>GarageIntel</strong> is an AI-powered assistant that transforms your workshop. Mechanics simply text a number-plate on WhatsApp, and receive a comprehensive vehicle profile, MOT history, and prioritized fault analysis in seconds.</p>
+        <p>Our service delivers up to <strong>50% faster</strong> diagnostics and <strong>30% fewer</strong> follow-up calls, while integrated booking, reminders, and invoicing streamline your daily operations.</p>
+        <p>Designed for garages aiming to stand out, GarageIntel enhances customer trust, boosts revenue, and future-proofs your business.</p>
+      </div>
+    </div>
+    <!-- Pricing Section -->
+    <div id="pricing" class="section hide">
+      <h1>Pricing Plans</h1>
+      <div class="pricing-grid">
+        <div class="card">
+          <h2>Essential</h2>
+          <p class="price">£40<span>/month</span></p>
+          <ul>
+            <li>WhatsApp VRM lookup</li>
+            <li>MOT & vehicle spec</li>
+            <li>GPT-fault analysis</li>
+            <li>Basic message logs</li>
+          </ul>
+          <a class="card-btn" href="mailto:info@garageintel.com?subject=Essential Plan">Sign Up</a>
+        </div>
+        <div class="card">
+          <h2>Professional</h2>
+          <p class="price">£100<span>/month</span></p>
+          <ul>
+            <li>All Essential features</li>
+            <li>Booking & calendar</li>
+            <li>MOT reminders</li>
+            <li>Custom Invoicing</li>
+          </ul>
+          <a class="card-btn" href="mailto:info@garageintel.com?subject=Professional Plan">Sign Up</a>
+        </div>
+        <div class="card">
+          <h2>Premium</h2>
+          <p class="price">£250<span>/month</span></p>
+          <ul>
+            <li>All Professional features</li>
+            <li>AI Repair Suggestions</li>
+            <li>Branded Reports</li>
+            <li>Multi-user Access</li>
+          </ul>
+          <a class="card-btn" href="mailto:info@garageintel.com?subject=Premium Plan">Sign Up</a>
+        </div>
       </div>
     </div>
   </main>
-
-  <footer>© <span id="year"></span> GarageIntel&nbsp;Ltd — All rights reserved.</footer>
-
+  <footer>
+    © <span id="year"></span> GarageIntel™ Ltd — All rights reserved.
+    <p class="legal">Vehicle data © DVSA OGL v3.0. Vehicle enquiry service © DVLA. AI suggestions © OpenAI. All trademarks are property of their respective owners.</p>
+  </footer>
   <script>
     const body = document.body;
-    const burger = document.getElementById('burger');
-    burger.onclick = () => body.classList.toggle('menu-open');
-
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const page = link.dataset.page;
-        document.querySelectorAll('.card').forEach(card => card.classList.toggle('hide', card.id !== page));
-        body.classList.remove('menu-open');
-      });
-    });
-
+    document.getElementById('burger').onclick = () => body.classList.toggle('menu-open');
+    document.querySelectorAll('nav a').forEach(link => link.addEventListener('click', e => {
+      e.preventDefault();
+      const page = link.dataset.page;
+      document.querySelectorAll('.section').forEach(sec => sec.classList.toggle('active', sec.id===page));
+      document.querySelectorAll('.section').forEach(sec => sec.classList.toggle('hide', sec.id!==page));
+      body.classList.remove('menu-open');
+    }));
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
