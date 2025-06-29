@@ -1,19 +1,109 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>GarageIntel</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GarageIntel – Coming Soon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
-    body{font-family:sans-serif;max-width:640px;margin:5vh auto;padding:0 1rem;line-height:1.5}
-    h1{margin-top:0}
+    :root {
+      --c-bg-start: #0a192f;
+      --c-bg-end:   #172a45;
+      --c-primary:  #64ffda;
+      --c-text:     #ccd6f6;
+      --c-muted:    #8892b0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--c-bg-start) 0%, var(--c-bg-end) 100%);
+      color: var(--c-text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 2rem;
+      animation: fadeIn 1s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-weight: 800;
+      color: var(--c-primary);
+      margin-bottom: 1rem;
+    }
+
+    .tagline {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      font-weight: 400;
+      margin-bottom: 2.5rem;
+      color: var(--c-muted);
+      max-width: 40ch;
+      margin-inline: auto;
+    }
+
+    .cta {
+      display: inline-block;
+      background: transparent;
+      border: 2px solid var(--c-primary);
+      color: var(--c-primary);
+      padding: 0.75rem 2.25rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      transition: background 200ms ease, color 200ms ease;
+    }
+
+    .cta:hover, .cta:focus {
+      background: var(--c-primary);
+      color: #0a192f;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 1rem 0 2rem;
+      color: var(--c-muted);
+    }
+
+    footer a { color: var(--c-primary); text-decoration: none; }
+    footer a:hover, footer a:focus { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <h1>GarageIntel</h1>
-  <p>Smart vehicle diagnostics &amp; MOT insights over WhatsApp.</p>
-  <p><strong>Address:</strong> 85 Stansfield Road, Hounslow, TW4 7QR<br>
-     <strong>Phone:</strong> +44 7490 722 739</p>
-  <p>Site under construction — check back soon!</p>
+  <main>
+    <div>
+      <h1>GarageIntel</h1>
+      <p class="tagline">Smart vehicle diagnostics &amp; MOT insights over WhatsApp. We’re tuning the engine – launching soon!</p>
+      <a class="cta" href="mailto:info@garageintel.com">Stay in the loop</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>📍 85 Stansfield Road, Hounslow, TW4 7QR &nbsp;•&nbsp; 📞 <a href="tel:+447490722739">+44&nbsp;7490&nbsp;722&nbsp;739</a></p>
+    <p>© <span id="year">2025</span> GarageIntel Ltd</p>
+  </footer>
+
+  <script>
+    // set current year automatically
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
