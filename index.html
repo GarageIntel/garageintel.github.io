@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* Variables */
     :root {
       --c-bg-start: #0a192f;
       --c-bg-end:   #172a45;
@@ -19,71 +18,76 @@
       --card-bg:    rgba(255,255,255,0.05);
       --easing:     cubic-bezier(.4,.2,.2,1);
     }
-    /* Base */
     *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
-    body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, var(--c-bg-start), var(--c-bg-end)); color: var(--c-text); min-height: 100vh; display: flex; flex-direction: column; position: relative; overflow-x: hidden; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--c-bg-start), var(--c-bg-end));
+      color: var(--c-text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
     /* Texture */
-    body::before { content:''; position:absolute; inset:0; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2"><rect width="1" height="1" fill="rgba(255,255,255,0.03)"/></svg>') repeat; pointer-events:none; }
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2"><rect width="1" height="1" fill="rgba(255,255,255,0.03)"/></svg>') repeat;
+      pointer-events: none;
+    }
     /* Header */
-    header { display:flex; justify-content:space-between; align-items:center; padding:1rem 1.5rem; z-index:10; }
-    .logo { font-size:1.4rem; font-weight:600; color:var(--c-primary); text-decoration:none; cursor:pointer; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; z-index: 10; }
+    .logo { font-size: 1.4rem; font-weight: 600; color: var(--c-primary); text-decoration: none; cursor: pointer; }
     /* Burger */
-    .burger { width:24px; height:16px; position:relative; cursor:pointer; }
-    .burger span { position:absolute; width:100%; height:2px; background:var(--c-primary); left:0; transition: transform .4s var(--easing), opacity .4s var(--easing); }
-    .burger span:nth-child(1){ top:0; }
-    .burger span:nth-child(2){ top:50%; transform:translateY(-50%); }
-    .burger span:nth-child(3){ bottom:0; }
-    body.menu-open .burger span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
-    body.menu-open .burger span:nth-child(2){ opacity:0; }
-    body.menu-open .burger span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+    .burger { width: 24px; height: 16px; position: relative; cursor: pointer; }
+    .burger span { position: absolute; width: 100%; height: 2px; background: var(--c-primary); left: 0; transition: transform .4s var(--easing), opacity .4s var(--easing); }
+    .burger span:nth-child(1) { top: 0; }
+    .burger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .burger span:nth-child(3) { bottom: 0; }
+    body.menu-open .burger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    body.menu-open .burger span:nth-child(2) { opacity: 0; }
+    body.menu-open .burger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
     /* Nav */
-    nav { position:fixed; top:0; right:-100vw; width:80vw; max-width:280px; height:100%; background:var(--c-bg-end); padding-top:4rem; display:flex; flex-direction:column; gap:.5rem; transition:right .45s var(--easing); z-index:9; }
-    body.menu-open nav { right:0; }
-    nav a { padding:.9rem 1.5rem; font-weight:500; color:var(--c-text); text-decoration:none; transition:background .35s var(--easing); }
-    nav a:hover { background:rgba(100,255,218,0.12); }
+    nav { position: fixed; top: 0; right: -100vw; width: 80vw; max-width: 280px; height: 100%; background: var(--c-bg-end); padding-top: 4rem; display: flex; flex-direction: column; gap: .5rem; transition: right .45s var(--easing); z-index: 9; }
+    body.menu-open nav { right: 0; }
+    nav a { padding: .9rem 1.5rem; font-weight: 500; color: var(--c-text); text-decoration: none; transition: background .35s var(--easing); }
+    nav a:hover { background: rgba(100,255,218,0.12); }
     /* Main */
-    main { flex:1; padding:2rem 1rem; }
-    .section { display:none; animation:fadeIn .5s var(--easing) forwards; }
-    .section.active { display:block; }
-    @keyframes fadeIn { from { opacity:0; transform:translateY(20px);} to { opacity:1; transform:translateY(0);} }
+    main { flex: 1; padding: 2rem 1rem; }
+    .section { display: none; animation: fadeIn .5s var(--easing) forwards; }
+    .section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     /* Hero */
-    .hero { max-width:640px; margin:0 auto; padding:2rem; text-align:center; }
-    .hero h1{ font-size:clamp(2rem,5.5vw,2.8rem); font-weight:600; color:var(--c-primary); margin-bottom:2rem; }
-    .hero .copy p{ text-align:justify; font-size:clamp(.98rem,3.3vw,1.08rem); line-height:1.7; margin-bottom:1.4rem; }
-    .btn{ display:inline-block; margin:0 auto; border:2px solid var(--c-primary); border-radius:2rem; padding:.6rem 2rem; font-weight:600; color:var(--c-primary); text-decoration:none; transition:background .35s var(--easing), transform .2s; }
-    .btn:hover{ background:var(--c-primary); color:var(--c-bg-end); transform:translateY(-2px); }
+    .hero { max-width: 640px; margin: 0 auto; padding: 2rem; text-align: center; }
+    .hero h1 { font-size: clamp(2rem,5.5vw,2.8rem); font-weight: 600; color: var(--c-primary); margin-bottom: 2rem; }
+    .hero .copy p { text-align: justify; font-size: clamp(.98rem,3.3vw,1.08rem); line-height: 1.7; margin-bottom: 1.4rem; }
+    .btn { display: inline-block; margin: 0 auto; border: 2px solid var(--c-primary); border-radius: 2rem; padding: .6rem 2rem; font-weight: 600; color: var(--c-primary); text-decoration: none; transition: background .35s var(--easing), transform .2s; }
+    .btn:hover { background: var(--c-primary); color: var(--c-bg-end); transform: translateY(-2px); }
     /* Pricing */
-    .pricing-grid{ display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; margin:2rem auto; max-width:920px; }
-    .card{ background:var(--card-bg); backdrop-filter:blur(5px); padding:2rem 1.5rem; border-radius:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.25); max-width:280px; text-align:center; transition:transform .3s var(--easing); display:flex; flex-direction:column; justify-content:space-between; }
-    .card:hover{ transform:translateY(-6px) scale(1.02); }
-    .pricing-grid h2{ font-size:1.3rem; color:var(--c-primary); margin-bottom:.5rem; }
-    .price{ font-size:2rem; font-weight:600; margin:1rem 0; }
-    .pricing-grid ul{ list-style:disc; padding-left:1.2rem; text-align:left; margin:1rem 0 1.5rem; line-height:1.5; }
-    .pricing-grid ul li{ margin:.65rem 0; font-size:1rem; }
+    .pricing-grid { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 2rem auto; max-width: 920px; }
+    .card { background: var(--card-bg); backdrop-filter: blur(5px); padding: 2rem 1.5rem; border-radius: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.25); max-width: 280px; text-align: center; transition: transform .3s var(--easing); display: flex; flex-direction: column; justify-content: space-between; }
+    .card:hover { transform: translateY(-6px) scale(1.02); }
+    .card h2 { font-size: 1.3rem; color: var(--c-primary); margin-bottom: .5rem; }
+    .price { font-size: 2rem; font-weight: 600; margin: 1rem 0; }
+    .pricing-grid ul { list-style: disc; padding-left: 1.2rem; text-align: left; margin: 1rem 0 1.5rem; line-height: 1.5; }
+    .pricing-grid ul li { margin: .65rem 0; font-size: 1rem; }
     /* Feature Details */
-    .feature-details{ max-width:920px; margin:2.5rem auto; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(5px); border-radius:1rem; text-align:left; }
-    .feature-details h2{ text-align:center; color:var(--c-primary); margin-bottom:1rem; }
-    .feature-details ul{ list-style:disc; padding-left:1.5rem; text-align:justify; line-height:1.5; }
-    .feature-details ul li{ margin:.6rem 0; font-size:1rem; }
-    /* Titles */
-    h1.section-title{ text-align:center; color:var(--c-primary); margin-bottom:1.5rem; font-size:clamp(2rem,5vw,2.8rem); }
+    .feature-details { max-width: 920px; margin: 2.5rem auto; padding: 1.5rem; background: var(--card-bg); backdrop-filter: blur(5px); border-radius: 1rem; text-align: left; }
+    .feature-details h2 { text-align: center; color: var(--c-primary); margin-bottom: 1rem; }
+    .feature-details ul { list-style: disc; padding-left: 1.5rem; text-align: justify; line-height: 1.5; }
+    .feature-details ul li { margin: .6rem 0; font-size: 1rem; }
+    /* Section Title */
+    h1.section-title { text-align: center; color: var(--c-primary); margin-bottom: 1.5rem; font-size: clamp(2rem,5vw,2.8rem); }
     /* Footer */
-    footer{ padding:1rem 1.5rem; text-align:center; font-size:.85rem; color:var(--c-muted); }
-    footer .legal{ max-width:800px; margin:.5rem auto 0; font-size:.75rem; line-height:1.4; }
-    @media(max-width:600px){
-      header{padding:.75rem 1rem;}
-      /* Mobile pricing: horizontal scroll with padding for visibility */
-      .pricing-grid{
-        flex-wrap:nowrap;
-        overflow-x:auto;
-        -webkit-overflow-scrolling:touch;
-        padding:0 1rem;
-      }
-      .pricing-grid .card{
-        flex:0 0 auto;
-        min-width:260px;
-      }
-    } .pricing-grid{ flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;} .pricing-grid .card{ flex:0 0 auto; min-width:260px;} }
+    footer { padding: 1rem 1.5rem; text-align: center; font-size: .85rem; color: var(--c-muted); }
+    footer .legal { max-width: 800px; margin: .5rem auto 0; font-size: .75rem; line-height: 1.4; }
+    @media(max-width:600px) {
+      header { padding: .75rem 1rem; }
+      .pricing-grid { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 0 1rem; }
+      .pricing-grid .card { flex: 0 0 auto; min-width: 260px; }
+    }
   </style>
 </head>
 <body>
@@ -96,7 +100,7 @@
     <a href="#pricing" data-page="pricing">Pricing</a>
   </nav>
   <main>
-    <!-- About -->
+    <!-- About Section -->
     <div id="about" class="section active">
       <div class="hero">
         <h1>About GarageIntel</h1>
@@ -108,7 +112,7 @@
         <a class="btn" href="mailto:info@garageintel.com">Keep Me Posted</a>
       </div>
     </div>
-    <!-- Pricing -->
+    <!-- Pricing Section -->
     <div id="pricing" class="section hide">
       <h1 class="section-title">Pricing Plans</h1>
       <div class="pricing-grid">
@@ -165,17 +169,22 @@
     <p class="legal">Vehicle data © DVSA OGL v3.0. Vehicle enquiry service © DVLA. AI suggestions © OpenAI. All trademarks are property of their respective owners.</p>
   </footer>
   <script>
+    // Toggle mobile menu
     const body = document.body;
     document.getElementById('burger').onclick = () => body.classList.toggle('menu-open');
-    document.querySelectorAll('nav a, .logo').forEach(link => link.addEventListener('click', e => {
-      e.preventDefault();
-      const page = link.getAttribute('data-page');
-      document.querySelectorAll('.section').forEach(sec => {
-        sec.classList.toggle('active', sec.id === page);
-        sec.classList.toggle('hide', sec.id !== page);
+    // Navigation
+    document.querySelectorAll('nav a, .logo').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const page = link.getAttribute('data-page');
+        document.querySelectorAll('.section').forEach(sec => {
+          sec.classList.toggle('active', sec.id === page);
+          sec.classList.toggle('hide', sec.id !== page);
+        });
+        body.classList.remove('menu-open');
       });
-      body.classList.remove('menu-open');
-    }));
+    });
+    // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
