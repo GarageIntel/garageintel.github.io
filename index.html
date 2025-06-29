@@ -72,17 +72,27 @@
     document.getElementById('year').textContent = new Date().getFullYear();
     const menuBtn = document.getElementById('menuBtn');
     const body = document.body;
-    const sections = document.querySelectorAll('section');
-    document.getElementById('navMenu').addEventListener('click', e => {
-      if(e.target.matches('a')){
-        e.preventDefault();
-        const target = e.target.dataset.target;
-        sections.forEach(sec => sec.classList.remove('active'));
-        document.getElementById(target).classList.add('active');
-        body.classList.remove('open');
-      }
+    const sections = document.querySelectorAll('main section');
+    const navLinks = document.querySelectorAll('nav a');
+
+    // Toggle navigation
+    menuBtn.addEventListener('click', () => {
+      body.classList.toggle('open');
     });
-    menuBtn.addEventListener('click', () => body.classList.toggle('open'));
+
+    // Section navigation
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = link.getAttribute('data-target');
+        sections.forEach(sec => sec.classList.remove('active'));
+        const activeSection = document.getElementById(target);
+        if (activeSection) {
+          activeSection.classList.add('active');
+        }
+        body.classList.remove('open');
+      });
+    });
   </script>
 </body>
 </html>
